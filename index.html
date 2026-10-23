@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gouthaman G | Forex & Gold Trader</title>
+<meta name="description" content="Portfolio of Gouthaman G: systematic XAU/USD and forex trader, equity investor, and Python developer.">
+<style>
+:root{
+  --bg:#07101d; --panel:#0d1a2c; --line:#1b2d46; --text:#e6edf6; --mute:#8fa3bd;
+  --gold:#e8b84a; --up:#2ec4a0; --down:#ef5b6b;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;background-attachment:fixed;background-blend-mode:soft-light}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 70% 0%,rgba(232,184,74,.08),transparent 55%),var(--bg);opacity:.93;z-index:-1}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono)}
+.up{color:var(--up)}.down{color:var(--down)}.gold{color:var(--gold)}
+
+/* ticker */
+.ticker{border-bottom:1px solid var(--line);background:#050b15;overflow:hidden;white-space:nowrap}
+.ticker-track{display:inline-flex;gap:40px;padding:9px 0;animation:scroll 40s linear infinite;font-family:var(--mono);font-size:13px;color:var(--mute)}
+.ticker-track span b{color:var(--text);font-weight:600;margin-right:6px}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:rgba(7,16,29,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:58px}
+.logo{font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:.2px}
+.logo i{color:var(--gold);font-style:normal}
+nav ul{display:flex;gap:22px;list-style:none;font-size:14px;color:var(--mute)}
+nav ul a:hover{color:var(--gold)}
+
+/* hero */
+.hero{padding:72px 0 56px}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--panel);padding:6px 14px;border-radius:99px;font-size:13px;color:var(--mute)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--up);box-shadow:0 0 0 0 rgba(46,196,160,.7);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(46,196,160,0)}100%{box-shadow:0 0 0 0 rgba(46,196,160,0)}}
+h1{font-family:var(--serif);font-size:clamp(38px,6vw,64px);line-height:1.05;margin:20px 0 18px;letter-spacing:-.5px}
+h1 em{font-style:normal;color:var(--gold)}
+.lead{color:var(--mute);font-size:17px;max-width:520px}
+.cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn{padding:12px 22px;border-radius:6px;font-weight:600;font-size:15px;border:1px solid var(--gold);transition:.2s}
+.btn.primary{background:var(--gold);color:#1a1405}
+.btn.primary:hover{background:#f3c862}
+.btn.ghost{color:var(--gold)}
+.btn.ghost:hover{background:rgba(232,184,74,.1)}
+
+/* chart panel */
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+.chart-head{display:flex;justify-content:space-between;font-family:var(--mono);font-size:13px;margin-bottom:8px;color:var(--mute)}
+.chart-head b{color:var(--gold);font-size:15px}
+#candles{width:100%;height:auto;display:block}
+.chart-foot{display:flex;gap:18px;font-family:var(--mono);font-size:12px;color:var(--mute);margin-top:8px;flex-wrap:wrap}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:10px;background:var(--panel);overflow:hidden}
+.stat{padding:22px 20px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat .n{font-family:var(--mono);font-size:30px;font-weight:700}
+.stat .l{font-size:13px;color:var(--mute);margin-top:2px}
+
+/* sections */
+section{padding:72px 0 0}
+h2{font-family:var(--serif);font-size:32px;margin-bottom:8px}
+.sub{color:var(--mute);margin-bottom:28px;max-width:640px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+.card h3{font-size:18px;margin-bottom:4px}
+.card .meta{font-family:var(--mono);font-size:12px;color:var(--gold);margin-bottom:12px}
+.card ul{padding-left:18px;color:var(--mute);font-size:15px}
+.card li{margin-bottom:7px}
+.card li::marker{color:var(--gold)}
+
+/* funnel + bar */
+.funnel{display:grid;gap:10px;margin:16px 0}
+.bar{height:34px;border-radius:5px;display:flex;align-items:center;padding:0 12px;font-family:var(--mono);font-size:13px;font-weight:600;color:#06121f}
+.wl{display:flex;height:34px;border-radius:5px;overflow:hidden;font-family:var(--mono);font-size:13px;font-weight:700;color:#06121f}
+.wl div{display:flex;align-items:center;padding:0 12px}
+
+/* tags */
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{border:1px solid var(--line);background:#0a1626;border-radius:5px;padding:5px 11px;font-family:var(--mono);font-size:13px}
+.tag.hot{border-color:rgba(232,184,74,.5);color:var(--gold)}
+.skill-row{padding:18px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:200px 1fr;gap:20px}
+.skill-row:first-child{border-top:0}
+.skill-row h3{font-size:15px;color:var(--gold);font-family:var(--serif)}
+
+/* holdings */
+.hold{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:18px 0}
+.hold div{background:#0a1626;border:1px solid var(--line);border-radius:8px;padding:14px;font-size:14px;text-align:center}
+.hold div span{display:block;font-family:var(--mono);font-size:12px;color:var(--mute);margin-top:2px}
+
+footer{margin-top:80px;border-top:1px solid var(--line);background:#050b15;padding:44px 0}
+.contact{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.contact a{border:1px solid var(--line);background:var(--panel);padding:10px 18px;border-radius:6px;font-size:15px}
+.contact a:hover{border-color:var(--gold);color:var(--gold)}
+.small{color:var(--mute);font-size:13px;margin-top:28px}
+
+@media(max-width:860px){
+  .hero-grid,.grid2{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:nth-child(2){border-right:0}
+  .stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .hold{grid-template-columns:1fr 1fr}
+  .skill-row{grid-template-columns:1fr;gap:8px}
+  nav ul{display:none}
+}
+@media(prefers-reduced-motion:reduce){.ticker-track,.dot{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="tt"></div>
+</div>
+
+<nav>
+  <div class="wrap">
+    <a href="#top" class="logo">Gouthaman<i>.</i>G</a>
+    <ul>
+      <li><a href="#trading">Trading</a></li>
+      <li><a href="#research">Gold Research</a></li>
+      <li><a href="#equities">Equities</a></li>
+      <li><a href="#plan2play">Plan2Play</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><span class="dot"></span> Active forex and gold trader</span>
+      <h1>I trade gold with rules, and size every position with <em>risk first</em>.</h1>
+      <p class="lead">Four years in the financial markets: forex, XAU/USD and Indian equities. I build and test rule-based strategies, track every trade, and study the results. Final-year B.Tech student in Cyber Security who writes Python to back it all up.</p>
+      <div class="cta">
+        <a class="btn primary" href="#research">See the XAU/USD research</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <div class="chart" aria-label="Decorative gold candlestick chart">
+      <div class="chart-head"><b>XAU/USD</b><span>Gold vs US Dollar</span></div>
+      <svg id="candles" viewBox="0 0 520 300" role="img" aria-label="Illustrative candlestick chart"></svg>
+      <div class="chart-foot"><span class="gold">Market structure</span><span>Price action</span><span>Risk-to-reward</span><span>Illustrative chart</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="stats">
+    <div class="stat"><div class="n gold">4 yrs</div><div class="l">in financial markets</div></div>
+    <div class="stat"><div class="n gold">~6 yrs</div><div class="l">of XAU/USD data backtested</div></div>
+    <div class="stat"><div class="n up">127W / 25L</div><div class="l">backtested trade record</div></div>
+    <div class="stat"><div class="n gold">3.1–3.5R</div><div class="l">average risk-to-reward</div></div>
+  </div>
+
+  <section id="trading">
+    <h2>Live trading</h2>
+    <p class="sub">I trade forex and gold with a fixed process. Every position has a defined risk, a stop-loss and a target before I enter.</p>
+    <div class="grid2">
+      <div class="card">
+        <h3>Proprietary trading challenge: $5K account</h3>
+        <div class="meta">Currently active</div>
+        <ul>
+          <li>Trading a $5,000 proprietary challenge account right now.</li>
+          <li>Predefined risk limits, position sizing, stop-loss management and rule-based execution.</li>
+          <li>Structured trade records to review strategy execution, risk exposure, outcomes and rule adherence.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Market and risk analysis</h3>
+        <div class="meta">Majors, crosses and gold</div>
+        <ul>
+          <li>Analyze EUR/USD, EUR/AUD, GBP/AUD and EUR/JPY, along with XAU/USD and Indian equities.</li>
+          <li>Build trading and investment plans around entry conditions, risk limits, stop-loss levels, target levels and portfolio exposure.</li>
+          <li>Familiar with prop firm rules: maximum drawdown, daily loss limits, position risk, minimum trading days and consistency requirements.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="margin-top:20px">
+      <h3>Instruments I trade and follow</h3>
+      <div class="tags" style="margin-top:12px">
+        <span class="tag hot">XAU/USD</span><span class="tag">EUR/USD</span><span class="tag">EUR/AUD</span><span class="tag">GBP/AUD</span><span class="tag">EUR/JPY</span><span class="tag">Indian equities</span>
+      </div>
+      <p class="sub" style="margin:14px 0 0">Platforms: MetaTrader 5 (MT5) and Exness. Approach: market structure, price action and technical analysis.</p>
+    </div>
+  </section>
+
+  <section id="research">
+    <h2>Systematic XAU/USD strategy</h2>
+    <p class="sub">An independent research project. I built a rule-based gold strategy and tested it on about 6 years of historical data.</p>
+    <div class="grid2">
+      <div class="card">
+        <h3>Setup filtering</h3>
+        <div class="meta">210+ potential trades → 150+ qualified setups</div>
+        <div class="funnel">
+          <div class="bar" style="width:100%;background:var(--mute)">210+ potential trades</div>
+          <div class="bar" style="width:72%;background:var(--gold)">150+ qualified setups</div>
+        </div>
+        <p style="color:var(--mute);font-size:15px">Multiple setup filters remove low-quality trades before they reach the results.</p>
+      </div>
+      <div class="card">
+        <h3>Backtested outcomes</h3>
+        <div class="meta">127 wins, 25 losses, about 83.6% win rate</div>
+        <div class="funnel">
+          <div class="wl"><div style="width:83.6%;background:var(--up)">127 wins</div><div style="width:16.4%;background:var(--down)">25</div></div>
+        </div>
+        <p style="color:var(--mute);font-size:15px">Observed average risk-to-reward of about <b class="gold">3.1–3.5R</b>.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:20px">
+      <h3>What I measure</h3>
+      <div class="tags" style="margin-top:12px">
+        <span class="tag">Win rate</span><span class="tag">Risk-to-reward</span><span class="tag">Trade frequency</span><span class="tag">Historical outcomes</span><span class="tag">Risk controls</span><span class="tag">Structured trade records</span><span class="tag">Expectancy</span><span class="tag">Drawdown</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="equities">
+    <h2>Equity investing</h2>
+    <p class="sub">A personal portfolio in Indian equity markets, about ₹50,000 invested across five companies.</p>
+    <div class="hold">
+      <div>ITC<span>Equity</span></div>
+      <div>Karnataka Bank<span>Equity</span></div>
+      <div>South Indian Bank<span>Equity</span></div>
+      <div>Manappuram Finance<span>Equity</span></div>
+      <div>Tata Motors<span>Equity</span></div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Hands-on experience</h3>
+        <ul>
+          <li>Equity research and company analysis.</li>
+          <li>Portfolio allocation and tracking.</li>
+          <li>Price movements and investment decision-making.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Other asset classes</h3>
+        <ul>
+          <li>Foundational knowledge of bonds, mutual funds and fixed-income concepts.</li>
+          <li>Diversification, and how equity differs from fixed income.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="plan2play">
+    <h2>Plan2Play: trading discipline and journal system</h2>
+    <p class="sub">A personal project. A trading workflow app that keeps me inside my rules.</p>
+    <div class="grid2">
+      <div class="card">
+        <h3>Workflow</h3>
+        <ul>
+          <li>Pre-trade validation</li>
+          <li>Strategy rulebooks</li>
+          <li>Post-trade journaling</li>
+          <li>Trade replay</li>
+          <li>Performance reporting</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Rule-based checks</h3>
+        <ul>
+          <li>Trade eligibility checks before entry.</li>
+          <li>Tracking of risk, outcomes and rule violations.</li>
+          <li>Tracking of overall trading performance.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <p class="sub">&nbsp;</p>
+    <div class="card" style="padding-top:8px;padding-bottom:8px">
+      <div class="skill-row"><h3>Financial markets</h3><div class="tags"><span class="tag hot">Forex</span><span class="tag hot">XAU/USD</span><span class="tag">Indian equities</span><span class="tag">EUR/USD</span><span class="tag">EUR/AUD</span><span class="tag">GBP/AUD</span><span class="tag">EUR/JPY</span><span class="tag">Market structure</span><span class="tag">Price action</span></div></div>
+      <div class="skill-row"><h3>Trading and investing</h3><div class="tags"><span class="tag">Strategy development</span><span class="tag">Technical analysis</span><span class="tag">Historical backtesting</span><span class="tag">Equity analysis</span><span class="tag">Trade journaling</span><span class="tag">Portfolio tracking</span></div></div>
+      <div class="skill-row"><h3>Risk and performance</h3><div class="tags"><span class="tag">Position sizing</span><span class="tag">Risk-per-trade</span><span class="tag">Stop-loss</span><span class="tag">Risk-to-reward</span><span class="tag">Drawdown</span><span class="tag">Expectancy</span><span class="tag">Win rate</span><span class="tag">Performance analysis</span></div></div>
+      <div class="skill-row"><h3>Other asset classes</h3><div class="tags"><span class="tag">Bonds</span><span class="tag">Mutual funds</span><span class="tag">Fixed-income concepts</span><span class="tag">Diversification</span></div></div>
+      <div class="skill-row"><h3>Technology</h3><div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">MongoDB</span><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Linux</span><span class="tag">Excel</span><span class="tag">MetaTrader 5</span><span class="tag">Automation</span></div></div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <p class="sub">&nbsp;</p>
+    <div class="card">
+      <h3>Amrita Vishwa Vidyapeetham, Coimbatore</h3>
+      <div class="meta">Graduating 2027 &nbsp;|&nbsp; CGPA 7.5/10</div>
+      <p style="color:var(--mute)">B.Tech, Computer Science and Engineering, Cyber Security. Python, SQL, databases, automation, Git and data-driven problem solving feed directly into my trading research.</p>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's talk markets</h2>
+    <p class="sub" style="margin-bottom:0">Based in Tiruchirappalli, India. Open to conversations about trading, research and finance roles.</p>
+    <div class="contact">
+      <a href="mailto:goutham240605@gmail.com">goutham240605@gmail.com</a>
+      <a href="tel:+918675115970">+91 8675115970</a>
+      <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#" target="_blank" rel="noopener">GitHub</a>
+      <a href="#" target="_blank" rel="noopener">Portfolio</a>
+    </div>
+    <p class="small">Backtested results are historical and do not guarantee future performance. Trading carries risk. Nothing here is financial advice.</p>
+  </div>
+</footer>
+
+<script>
+// Ticker (names only, no prices)
+(function(){
+  var items=[["XAU/USD","Gold"],["EUR/USD","Euro"],["EUR/AUD","Euro/Aussie"],["GBP/AUD","Sterling/Aussie"],["EUR/JPY","Euro/Yen"],["ITC","NSE"],["TATAMOTORS","NSE"],["MANAPPURAM","NSE"],["SOUTHBANK","NSE"],["KTKBANK","NSE"]];
+  var h=items.map(function(i){return '<span><b>'+i[0]+'</b>'+i[1]+'</span>'}).join('');
+  document.getElementById('tt').innerHTML=h+h+h+h;
+})();
+
+// Illustrative candlestick chart (seeded, decorative)
+(function(){
+  var svg=document.getElementById('candles'),ns='http://www.w3.org/2000/svg',W=520,H=300;
+  var s=7;function r(){s=(s*9301+49297)%233280;return s/233280}
+  function el(n,a){var e=document.createElementNS(ns,n);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e}
+  for(var g=1;g<5;g++)el('line',{x1:0,x2:W,y1:g*H/5,y2:g*H/5,stroke:'#1b2d46','stroke-width':1,'stroke-dasharray':'3 5'});
+  var n=34,p=170,data=[];
+  for(var i=0;i<n;i++){var o=p,d=(r()-.42)*34,c=o+d;var hi=Math.max(o,c)+r()*12,lo=Math.min(o,c)-r()*12;data.push([o,hi,lo,c]);p=c}
+  var mn=Math.min.apply(null,data.map(function(d){return d[2]})),mx=Math.max.apply(null,data.map(function(d){return d[1]}));
+  function y(v){return H-18-(v-mn)/(mx-mn)*(H-50)}
+  var step=W/n;
+  data.forEach(function(d,i){
+    var x=i*step+step/2,up=d[3]>=d[0],col=up?'#2ec4a0':'#ef5b6b';
+    el('line',{x1:x,x2:x,y1:y(d[1]),y2:y(d[2]),stroke:col,'stroke-width':1.5});
+    el('rect',{x:x-step*.3,width:step*.6,y:Math.min(y(d[0]),y(d[3])),height:Math.max(2,Math.abs(y(d[0])-y(d[3]))),fill:col,rx:1});
+  });
+  // entry / stop / target markers
+  var last=data[n-1][3],ey=y(last),sy=ey+34,ty=Math.max(14,ey-34*3.2);
+  [[ey,'Entry','#e8b84a'],[sy,'Stop','#ef5b6b'],[ty,'Target 3.2R','#2ec4a0']].forEach(function(m){
+    el('line',{x1:W*.55,x2:W,y1:m[0],y2:m[0],stroke:m[2],'stroke-width':1.2,'stroke-dasharray':'6 4'});
+    var t=el('text',{x:W-6,y:m[0]-5,'text-anchor':'end',fill:m[2],'font-size':11,'font-family':'ui-monospace,Consolas,monospace'});t.textContent=m[1];
+  });
+})();
+</script>
+</body>
+</html>
